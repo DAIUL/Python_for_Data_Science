@@ -1,0 +1,10 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ft_package"
+version = "0.0.1"
+description = "test package for 42 project"
+readme = "README.md"
+requires-python = ">=3.0"
