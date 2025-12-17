@@ -1,14 +1,15 @@
 import numpy as np
 from PIL import Image
-from load_image import ft_load
-import matplotlib.pyplot as plt
 
 
-def zoom(path: str):
+def ft_load(path: str):
     '''
-    Take the path of an image then turn it grayscale and zoom in
+    This function takes a path to an image,
+    convert it into an array of rgb values for each of it's pixels
+    and prints it
 
-    :param path: image path
+    :param path: image's path
+    :return: array
     '''
     try:
         img = Image.open(path)
@@ -22,17 +23,14 @@ def zoom(path: str):
         croppedImg = img.crop((left, top, right, bottom))
         grayCroppedImg = croppedImg.convert('L')
 
+        grayCroppedImg.show()
+
         arr = np.array(grayCroppedImg)
         preciseArr = arr[..., np.newaxis]
 
-        plt.imshow(arr, cmap='gray')
-        plt.xticks(np.arange(0, arr.shape[1], 50))
-        plt.yticks(np.arange(0, arr.shape[0], 50))
-
-        plt.show()
-
-        print(f"New shape after slicing: {preciseArr.shape} or {arr.shape}")
-        return preciseArr
+        print(f"The shape of the image is: {preciseArr.shape} or {arr.shape}")
+        print(preciseArr)
+        return arr
 
     except FileNotFoundError:
         print("Error: file not found")
@@ -41,14 +39,3 @@ def zoom(path: str):
     except OSError:
         print("Error: unsupported or corrupted file")
         return None
-
-
-def main():
-
-    print(ft_load('Animal.jpeg'))
-    print(zoom('Animal.jpeg'))
-    return
-
-
-if __name__ == '__main__':
-    main()
