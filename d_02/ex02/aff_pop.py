@@ -31,25 +31,25 @@ def main():
     '''
     try:
         df = load("Population Totale.csv")
-        row_df = df.loc['France']
-        row_df_2 = df.loc['Japan']
+        pop_france = df.loc['France']
+        pop_japan = df.loc['Japan']
 
-        row_df = row_df.reset_index()
-        row_df.columns = ["Year", "Population"]
-        row_df["Population"] = row_df["Population"].apply(str_to_float)
-        row_df["Year"] = row_df["Year"].astype(int)
-        row_df = row_df[row_df["Year"] <= 2050]
+        pop_france = pop_france.reset_index()
+        pop_france.columns = ["Year", "Population"]
+        pop_france["Population"] = pop_france["Population"].apply(str_to_float)
+        pop_france["Year"] = pop_france["Year"].astype(int)
+        pop_france = pop_france[pop_france["Year"] <= 2050]
 
-        row_df_2 = row_df_2.reset_index()
-        row_df_2.columns = ["Year", "Population"]
-        row_df_2["Population"] = row_df_2["Population"].apply(str_to_float)
-        row_df_2["Year"] = row_df_2["Year"].astype(int)
-        row_df_2 = row_df_2[row_df_2["Year"] <= 2050]
+        pop_japan = pop_japan.reset_index()
+        pop_japan.columns = ["Year", "Population"]
+        pop_japan["Population"] = pop_japan["Population"].apply(str_to_float)
+        pop_japan["Year"] = pop_japan["Year"].astype(int)
+        pop_japan = pop_japan[pop_japan["Year"] <= 2050]
 
-        row_df["Country"] = "France"
-        row_df_2["Country"] = "Japan"
+        pop_france["Country"] = "France"
+        pop_japan["Country"] = "Japan"
 
-        combined_df = pd.concat([row_df, row_df_2])
+        combined_df = pd.concat([pop_france, pop_japan])
 
         sns.lineplot(data=combined_df,
                      x="Year", y="Population", hue="Country")
